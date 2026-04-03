@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      background: #0f172a;
+      color: #fff;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .wa-label {
+      background: #ffffff;
+      color: #111827;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      animation: floatInOut 1.8s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    .wa-button-wrap {
+      position: relative;
+      width: 64px;
+      height: 64px;
+    }
+
+    .wa-ripple,
+    .wa-ripple::before,
+    .wa-ripple::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: rgba(37, 211, 102, 0.28);
+      animation: ripple 2s infinite;
+    }
+
+    .wa-ripple::before {
+      animation-delay: 0.4s;
+    }
+
+    .wa-ripple::after {
+      animation-delay: 0.8s;
+    }
+
+    .wa-button {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45);
+      animation: bounceSoft 1.6s infinite;
+      transition: transform 0.2s ease;
+    }
+
+    .wa-button:hover {
+      transform: scale(1.08);
+    }
+
+    .wa-button svg {
+      width: 30px;
+      height: 30px;
+      fill: white;
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      70% {
+        transform: scale(1.8);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1.8);
+        opacity: 0;
+      }
+    }
+
+    @keyframes bounceSoft {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes floatInOut {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .wa-label {
+        display: none;
+      }
+      .wa-button-wrap {
+        width: 58px;
+        height: 58px;
+      }
+      .wa-button {
+        width: 58px;
+        height: 58px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Your Landing Page</h1>
+    <p>Yahan apna business content daalo.</p>
+  </div>
+
+  <a
+    class="whatsapp-float"
+    href="https://wa.me/639979455841?text=Hello%20sir"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <div class="wa-label">Chat on WhatsApp</div>
+
+    <div class="wa-button-wrap">
+      <div class="wa-ripple"></div>
+      <div class="wa-button">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M19.11 17.21c-.27-.13-1.58-.78-1.82-.87-.24-.09-.42-.13-.59.14-.17.27-.68.87-.83 1.05-.15.18-.31.2-.58.07-.27-.13-1.13-.41-2.15-1.32-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.55.12-.12.27-.31.41-.47.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.47-.07-.13-.59-1.43-.81-1.96-.21-.51-.43-.44-.59-.45h-.5c-.18 0-.47.07-.72.34-.25.27-.95.93-.95 2.27 0 1.34.97 2.63 1.1 2.81.14.18 1.91 2.91 4.62 4.08.64.28 1.14.45 1.53.58.64.2 1.22.17 1.68.1.51-.08 1.58-.65 1.8-1.28.22-.63.22-1.17.15-1.28-.06-.11-.24-.18-.51-.31zM16.02 3.2c-7.06 0-12.79 5.7-12.79 12.74 0 2.25.59 4.45 1.72 6.38L3.1 28.8l6.67-1.75a12.82 12.82 0 0 0 6.24 1.6h.01c7.05 0 12.78-5.7 12.78-12.75 0-3.41-1.33-6.61-3.76-9.02A12.7 12.7 0 0 0 16.02 3.2zm0 23.29h-.01a10.7 10.7 0 0 1-5.45-1.49l-.39-.23-3.96 1.04 1.06-3.86-.25-.4a10.55 10.55 0 0 1-1.62-5.62c0-5.86 4.78-10.63 10.66-10.63 2.84 0 5.5 1.1 7.5 3.1a10.52 10.52 0 0 1 3.12 7.5c0 5.86-4.79 10.6-10.66 10.6z"/>
+        </svg>
+      </div>
+    </div>
+  </a>
+</body>
+</html>
