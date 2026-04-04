@@ -11,6 +11,7 @@ body {
   background:#0f172a;
   color:white;
   margin:0;
+  overflow-x: hidden;
 }
 
 .topbar {
@@ -45,9 +46,21 @@ h1 {
   border-radius:10px;
   display:inline-block;
   margin-top:20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-/* 🔥 WhatsApp Floating Animation */
+.btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* 🔥 Enhanced WhatsApp Floating Animation */
 .whatsapp-float{
   position:fixed;
   bottom:20px;
@@ -56,23 +69,133 @@ h1 {
 }
 
 .wa-btn{
-  width:60px;
-  height:60px;
-  background:#25D366;
+  width:70px;
+  height:70px;
+  background: linear-gradient(45deg, #25D366, #128C7E);
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   color:white;
-  font-size:28px;
+  font-size:32px;
   text-decoration:none;
-  animation:pulse 1.5s infinite;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s ease;
+  animation: waPulse 2s infinite, waBounce 3s infinite;
 }
 
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.2);}
-  100%{transform:scale(1);}
+.wa-btn:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+}
+
+@keyframes waPulse{
+  0%{box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);}
+  70%{box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);}
+  100%{box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);}
+}
+
+@keyframes waBounce{
+  0%, 20%, 50%, 80%, 100%{transform: translateY(0);}
+  40%{transform: translateY(-10px);}
+  60%{transform: translateY(-5px);}
+}
+
+/* 🔥 POPUP MODAL */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup-content {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  transform: scale(0.7);
+  animation: popupScale 0.4s ease forwards;
+  border: 2px solid #22c55e;
+}
+
+@keyframes popupScale {
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.close-popup {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  color: #22c55e;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close-popup:hover {
+  color: #16a34a;
+  transform: rotate(90deg);
+}
+
+.popup-title {
+  color: #22c55e;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.popup-text {
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.pulse-glow {
+  animation: glow 1.5s infinite;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px #22c55e; }
+  50% { box-shadow: 0 0 20px #22c55e, 0 0 30px #22c55e; }
+  100% { box-shadow: 0 0 5px #22c55e; }
+}
+
+/* Floating particles */
+.particle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1001;
+  animation: floatUp 3s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(1);
+    opacity: 0;
+  }
 }
 </style>
 
@@ -102,18 +225,76 @@ h1 {
 <p>✅ 100% Trusted Work</p>
 <p>✅ Instant Payment Guarantee</p>
 
-<a class="btn" href="https://wa.me/639979455841?text=Hello%20mujhe%20Binance%20account%20rent%20par%20dena%20hai">
+<a class="btn pulse-glow" href="#" onclick="showPopup()">
 👉 WhatsApp Now
 </a>
 
 </div>
 
-<!-- 🔥 Floating WhatsApp Button -->
+<!-- 🔥 Enhanced Floating WhatsApp Button -->
 <div class="whatsapp-float">
-  <a class="wa-btn" href="https://wa.me/639979455841?text=Hello%20mujhe%20Binance%20account%20rent%20par%20dena%20hai" target="_blank">
+  <a class="wa-btn" href="#" onclick="showPopup()">
     💬
   </a>
 </div>
+
+<!-- 🔥 POPUP MODAL -->
+<div id="whatsappPopup" class="popup-overlay" onclick="closePopup(event)">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <span class="close-popup" onclick="closePopup()">&times;</span>
+    <div style="font-size: 50px; margin-bottom: 20px;">🚀</div>
+    <h2 class="popup-title">Ready for High Payment Work?</h2>
+    <p class="popup-text">💰 ₹70,000 in 10 Hours Guaranteed!</p>
+    <p class="popup-text">⚡ Instant Payment | 100% Safe</p>
+    <a href="https://wa.me/639979455841?text=Hello%20mujhe%20Binance%20account%20rent%20par%20dena%20hai" 
+       target="_blank" 
+       class="btn pulse-glow"
+       style="margin-top: 20px; font-size: 20px; padding: 18px 35px;">
+      🎯 Connect on WhatsApp Now!
+    </a>
+  </div>
+</div>
+
+<script>
+// Popup functions
+function showPopup() {
+  document.getElementById('whatsappPopup').style.display = 'flex';
+  createParticles();
+}
+
+function closePopup(event) {
+  document.getElementById('whatsappPopup').style.display = 'none';
+}
+
+// Floating particles effect
+function createParticles() {
+  for(let i = 0; i < 15; i++) {
+    setTimeout(() => {
+      createParticle();
+    }, i * 100);
+  }
+}
+
+function createParticle() {
+  const particle = document.createElement('div');
+  particle.className = 'particle';
+  particle.style.left = Math.random() * 100 + 'vw';
+  particle.style.background = `hsl(${Math.random() * 60 + 120}, 70%, 50%)`;
+  particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+  document.body.appendChild(particle);
+  
+  setTimeout(() => {
+    particle.remove();
+  }, 5000);
+}
+
+// Auto particles every 10 seconds
+setInterval(() => {
+  if(Math.random() > 0.7) {
+    createParticles();
+  }
+}, 10000);
+</script>
 
 </body>
 </html>
